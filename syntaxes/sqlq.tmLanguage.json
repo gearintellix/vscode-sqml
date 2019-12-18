@@ -1,0 +1,174 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "SQLQ Markup Language on Golang",
+	"firstLineMatch": "#!sqlq\\/(v[0-9\\.]+):(\\w+)",
+	"patterns": [
+		{
+			"name": "comment.line.percentage.header.sqlq",
+			"match": "#!sqlq\\/(v[0-9\\.]+):(\\w+)",
+			"captures": {
+				"1": {
+					"name": "constant.character.escape.header.version.sqlq"
+				},
+				"2": {
+					"name": "entity.name.type.header.type.sqlq"
+				}
+			}
+		},
+		{
+			"include": "#u2-tag"
+		},
+		{
+			"include": "#header-tag"
+		}
+	],
+	"repository": {
+		"header-tag": {
+			"name": "keyword.operator.tag-header.sqlq",
+			"begin": "<([^\\/:]+):(?::(\\w+|@)|(\\w+))",
+			"end": "(?:\\/>|(?<=<)\\/(\\1):(?::(\\2)|(\\3))>)",
+			"beginCaptures": {
+				"1": {
+					"name": "entity.name.tag.tag-head.sqlq"
+				},
+				"2": {
+					"name": "entity.name.function.tag-head.name.binding.sqlq"
+				},
+				"3": {
+					"name": "keyword.operator.tag-head.name.sqlq"
+				}
+			},
+			"endCaptures": {
+				"1": {
+					"name": "entity.name.tag.tag-foot.sqlq"
+				},
+				"2": {
+					"name": "entity.name.function.tag-foot.name.binding.sqlq"
+				},
+				"3": {
+					"name": "keyword.operator.tag-foot.name.sqlq"
+				}
+			},
+			"patterns": [
+				{
+					"begin": ">",
+					"end": "<",
+					"patterns": [
+						{
+							"include": "#u2-tag"
+						}
+					]
+				},
+				{
+					"include": "#tag-body"
+				}
+			]
+		},
+		"tag-body": {
+			"name": "keyword.operator.tag-body.sqlq",
+			"patterns": [
+				{
+					"begin": "\\[",
+					"end": "\\]",
+					"patterns": [
+						{
+							"name": "entity.name.type.index.sqlq",
+							"match": "[^\\]]+"
+						}
+					]
+				},
+				{
+					"begin":"\\{",
+					"end": "\\}",
+					"patterns": [
+						{
+							"include": "#tag-metas"
+						}
+					]
+				}
+			]
+		},
+		"tag-metas": {
+			"begin": "([^\\s>:]+)(?:(?:\\s|)>(?:\\s|)([\\w]+)|)\\:",
+			"beginCaptures": {
+				"1": {
+					"name": "entity.other.attribute-name.key.sqlq"
+				},
+				"2": {
+					"name": "entity.name.section.alias.sqlq"
+				}
+			},
+			"end": "[;\n]",
+			"patterns": [
+				{
+					"include": "#strings"
+				},
+				{
+					"match": ":(\\w+)",
+					"name": "variable.other.value.binding.sqlq"
+				},
+				{
+					"include": "#u2-tag"
+				}
+			]
+		},
+		"u2-tag": {
+			"name": "keyword.operator.u2.wrapper.sqlq",
+			"begin":"__(?=[^\\s]*?__)",
+			"end": "__",
+			"patterns": [
+				{
+					"match": "(?!\\W{1,2})([^\\s]*?)(?=__)",
+					"captures": {
+						"1": {
+							"name": "string.quoted.single.u2.body.sqlq"
+						}
+					}
+				},
+				{
+					"match": "(?:\\W{1,2})([^\\s]*?)(?=__)",
+					"captures": {
+						"1": {
+							"name": "variable.other.u2.body.binding.sqlq"
+						}
+					}
+				}
+			]
+		},
+		"u2-tag-highlight": {
+			"name": "entity.other.attribute-name.u2.wrapper.highlight.sqlq",
+			"begin":"__(?=[^\\s]*?__)",
+			"end": "__",
+			"patterns": [
+				{
+					"match": "(?!\\W{1,2})([^\\s]*?)(?=__)",
+					"captures": {
+						"1": {
+							"name": "entity.name.type.u2.body.highlight.sqlq"
+						}
+					}
+				},
+				{
+					"match": "(?:\\W{1,2})([^\\s]*?)(?=__)",
+					"captures": {
+						"1": {
+							"name": "variable.other.u2.body.binding.highlight.sqlq"
+						}
+					}
+				}
+			]
+		},
+		"strings": {
+			"name": "string.quoted.double.sqlq",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"include": "#u2-tag-highlight"
+				}
+			]
+		}
+	},
+	"scopeName": "source.sqlm",
+	"injectionSelector": "source.sqlm, L:string.quoted.raw.go"
+}

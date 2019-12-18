@@ -1,0 +1,26 @@
+{
+    "name": "sqlm",
+    "displayName": "sqlm",
+    "description": "SQLQ Language Markup",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.41.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "sqlq",
+            "aliases": ["SQLQ", "sqlq"],
+            "extensions": [".sqlm", ".go"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "sqlq",
+            "scopeName": "source.sqlm",
+			"path": "./syntaxes/sqlq.tmLanguage.json",
+			"injectTo": ["source.go"]
+        }]
+    }
+}
