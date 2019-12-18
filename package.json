@@ -1,19 +1,21 @@
 {
-    "name": "sqlm",
-    "displayName": "sqlm",
+    "name": "vscode-sqlm",
+    "displayName": "SQLQ Language Markup",
     "description": "SQLQ Language Markup",
-    "version": "0.0.1",
+    "version": "1.0.2",
     "engines": {
         "vscode": "^1.41.0"
     },
     "categories": [
         "Programming Languages"
     ],
+    "publisher": "gearintellix",
+    "repository": "https://github.com/gearintellix/vscode-sqlm",
     "contributes": {
         "languages": [{
             "id": "sqlq",
             "aliases": ["SQLQ", "sqlq"],
-            "extensions": [".sqlm", ".go"],
+            "extensions": [".sqlm"],
             "configuration": "./language-configuration.json"
         }],
         "grammars": [{
