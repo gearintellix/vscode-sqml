@@ -1,8 +1,8 @@
 {
-    "name": "vscode-sqlm",
-    "displayName": "SQLQ Language Markup",
-    "description": "SQLQ Language Markup",
-    "version": "1.0.2",
+    "name": "vscode-sqml",
+    "displayName": "SQLQ Markup Language",
+    "description": "SQML (SQLQ Markup Language) ",
+    "version": "1.0.3",
     "engines": {
         "vscode": "^1.41.0"
     },
@@ -10,19 +10,34 @@
         "Programming Languages"
     ],
     "publisher": "gearintellix",
-    "repository": "https://github.com/gearintellix/vscode-sqlm",
+    "repository": "https://github.com/gearintellix/vscode-sqml",
     "contributes": {
-        "languages": [{
-            "id": "sqlq",
-            "aliases": ["SQLQ", "sqlq"],
-            "extensions": [".sqlm"],
-            "configuration": "./language-configuration.json"
-        }],
-        "grammars": [{
-            "language": "sqlq",
-            "scopeName": "source.sqlm",
-			"path": "./syntaxes/sqlq.tmLanguage.json",
-			"injectTo": ["source.go"]
-        }]
+        "languages": [
+            {
+                "id": "sqlq",
+                "aliases": ["SQLQ", "sqlq", "SQML", "sqml"],
+                "extensions": [".sqml"],
+                "configuration": "./language-configuration.json"
+            },
+            {
+                "id": "sqlq.go",
+                "aliases": ["SQLQ-GO", "sqlq-go", "SQML-GO", "sqml-go"],
+                "extensions": [],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "sqlq",
+                "scopeName": "source.sqml",
+                "path": "./syntaxes/sqlq.tmLanguage.json"
+            },
+            {
+                "language": "sqlq.go",
+                "scopeName": "source.sqml.go",
+                "path": "./syntaxes/sqlq.go.tmLanguage.json",
+                "injectTo": ["source.go"]
+            }
+        ]
     }
 }

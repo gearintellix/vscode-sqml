@@ -1,12 +1,10 @@
 {
 	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-	"name": "SQLQ Markup Language",
-	"firstLineMatch": "#!sqlq\\/(v[0-9\\.]+):(\\w+)",
+	"name": "SQLQ Markup Language for Golang",
 	"patterns": [
 		{
-			"begin": "#!sqlq\\/(v[0-9\\.]+):(\\w+)",
-			"end": "(#!!sqlq|#!!!)",
-			"beginCaptures": {
+			"match": "#!sqlq\\/(v[0-9\\.]+):(\\w+)",
+			"captures": {
 				"0": {
 					"name": "comment.line.percentage.header.sqlq"
 				},
@@ -16,20 +14,13 @@
 				"2": {
 					"name": "entity.name.type.header.type.sqlq"
 				}
-			},
-			"endCaptures": {
-				"0": {
-					"name": "comment.line.percentage.footer.sqlq"
-				}
-			},
-			"patterns": [
-				{
-					"include": "#u2-tag"
-				},
-				{
-					"include": "#header-tag"
-				}
-			]
+			}
+		},
+		{
+			"include": "#u2-tag"
+		},
+		{
+			"include": "#header-tag"
 		}
 	],
 	"repository": {
@@ -179,5 +170,6 @@
 			]
 		}
 	},
-	"scopeName": "source.sqml"
+	"scopeName": "source.sqml.go",
+	"injectionSelector": "L:string.quoted.raw.go"
 }
