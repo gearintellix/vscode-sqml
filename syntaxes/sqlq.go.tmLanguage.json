@@ -3,6 +3,9 @@
 	"name": "SQLQ Markup Language for Golang",
 	"patterns": [
 		{
+			"include": "#struct-meta"
+		},
+		{
 			"match": "#!sqlq\\/(v[0-9\\.]+):(\\w+)",
 			"captures": {
 				"0": {
@@ -24,9 +27,201 @@
 		}
 	],
 	"repository": {
+		"struct-meta-commas": {
+			"match": ",",
+			"name": "keyword.operator.struct-meta.comma.sqlq"
+		},
+		"struct-meta-comment-block": {
+			"begin": "/\\*",
+			"beginCaptures": {
+				"0": {
+					"name": "comment.block.struct-meta.comment.begin.sqlq"
+				}
+			},
+			"end": "\\*/",
+			"endCaptures": {
+				"0": {
+					"name": "comment.block.struct-meta.comment.end.sqlq"
+				}
+			},
+			"name": "comment.block.struct-meta.sqlq"
+		},
+		"struct-meta-escapes": {
+			"patterns": [
+				{
+					"match": "\\\\[0-9a-fA-F]{1,6}",
+					"name": "constant.character.escape.struct-meta.codepoint.sqlq"
+				},
+				{
+					"begin": "\\\\$\\s*",
+					"end": "^(?<!\\G)",
+					"name": "constant.character.escape.struct-meta.newline.sqlq"
+				},
+				{
+					"match": "\\\\.",
+					"name": "constant.character.escape.struct-meta.sqlq"
+				}
+			]
+		},
+		"struct-meta-value-symbol": {
+			"patterns": [
+				{
+					"match": "(true|false)",
+					"name": "constant.language.struct-meta.constant.sqlq"
+				},
+				{
+					"match": "\\$(\\w+)",
+					"name": "variable.other.struct-meta.linked.sqlq"
+				}
+			]
+		},
+		"struct-meta-string": {
+			"patterns": [
+				{
+					"begin": "\"",
+					"beginCaptures": {
+						"0": {
+							"name": "string.quoted.double.struct-meta.string.begin.sqlq"
+						}
+					},
+					"end": "\"|(?<!\\\\)(?=$|\\n)",
+					"endCaptures": {
+						"0": {
+							"name": "string.quoted.double.struct-meta.string.end.sqlq"
+						}
+					},
+					"name": "string.quoted.double.struct-meta.sqlq",
+					"patterns": [
+						{
+							"begin": "(?:\\G|^)(?=(?:[^\\\\\"]|\\\\.)+$)",
+							"end": "$",
+							"name": "invalid.illegal.struct-meta.unclosed.string.sqlq",
+							"patterns": [
+								{
+									"include": "#struct-meta-escapes"
+								}
+							]
+						},
+						{
+							"include": "#struct-meta-escapes"
+						},
+						{
+							"include": "#struct-meta-value-symbol"
+						}
+					]
+				},
+				{
+					"begin": "'",
+					"beginCaptures": {
+						"0": {
+							"name": "string.quoted.single.struct-meta.string.begin.sqlq"
+						}
+					},
+					"end": "'|(?<!\\\\)(?=$|\\n)",
+					"endCaptures": {
+						"0": {
+							"name": "string.quoted.single.struct-meta.string.end.sqlq"
+						}
+					},
+					"name": "string.quoted.single.struct-meta.sqlq",
+					"patterns": [
+						{
+							"begin": "(?:\\G|^)(?=(?:[^\\\\']|\\\\.)+$)",
+							"end": "$",
+							"name": "invalid.illegal.struct-meta.unclosed.string.sqlq",
+							"patterns": [
+								{
+									"include": "#struct-meta-escapes"
+								}
+							]
+						},
+						{
+							"include": "#struct-meta-escapes"
+						},
+						{
+							"include": "#struct-meta-value-symbol"
+						}
+					]
+				}
+			]
+		},
+		"struct-meta-property-values": {
+			"patterns": [
+				{
+					"include": "#struct-meta-commas"
+				},
+				{
+					"include": "#struct-meta-comment-block"
+				},
+				{
+					"include": "#struct-meta-escapes"
+				},
+				{
+					"include": "#struct-meta-string"
+				},
+				{
+					"include": "#struct-meta-value-symbol"
+				}
+			]
+		},
+		"struct-meta": {
+			"begin": "sqlq:\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"include": "#struct-meta-comment-block"
+				},
+				{
+					"include": "#struct-meta-escapes"
+				},
+				{
+					"name": "keyword.operator.struct-meta.body.sqlq",
+					"begin": "(@|\\w){",
+					"end": "}",
+					"beginCaptures": {
+						"1": {
+							"name": "storage.type.struct-meta.name.sqlq"
+						}
+					},
+					"patterns": [
+						{
+							"begin": "(?<![-a-zA-Z])(?=[-a-zA-Z])",
+							"end": "$|(?![-a-zA-Z])",
+							"name": "entity.name.type.struct-meta.property-name.sqlq"
+						},
+						{
+							"begin": "(:)\\s*",
+							"beginCaptures": {
+								"1": {
+									"name": "keyword.operator.struct-meta.separator.sqlq"
+								}
+							},
+							"end": "\\s*(;)|\\s*(?=}|\\))",
+							"endCaptures": {
+								"1": {
+									"name": "keyword.operator.struct-meta.rule.sqlq"
+								}
+							},
+							"patterns": [
+								{
+									"include": "#struct-meta-comment-block"
+								},
+								{
+									"include": "#struct-meta-property-values"
+								}
+							]
+						},
+						{
+							"match": ";",
+							"name": "keyword.operator.struct-meta.rule.sqlq"
+						}
+					]
+				}
+			]
+		},
 		"header-tag": {
 			"name": "keyword.operator.tag-header.sqlq",
-			"begin": "<([^\\/:]+):(?::|:(\\w+|@)|(\\w+))(?=[^a-zA-Z0-9])",
+			"begin": "<(\\w+):(?::|:(\\w+|@)|(\\w+))(?=[^a-zA-Z0-9])",
 			"end": "(?:\\/>|(?<=<)\\/(\\1):(?::|:(\\2)|(\\3))>)",
 			"beginCaptures": {
 				"1": {

@@ -35,7 +35,7 @@
 	"repository": {
 		"header-tag": {
 			"name": "keyword.operator.tag-header.sqlq",
-			"begin": "<([^\\/:]+):(?::|:(\\w+|@)|(\\w+))(?=[^a-zA-Z0-9])",
+			"begin": "<(\\w+):(?::|:(\\w+|@)|(\\w+))(?=[^a-zA-Z0-9])",
 			"end": "(?:\\/>|(?<=<)\\/(\\1):(?::|:(\\2)|(\\3))>)",
 			"beginCaptures": {
 				"1": {
