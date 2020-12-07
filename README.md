@@ -9,6 +9,3 @@ Currently SQLQ Project is not yet public.
 ### Example syntax:
 
 ![Example](_/example-syntax.png)
-
-
-## Release Notes

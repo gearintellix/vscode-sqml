@@ -1,5 +1,9 @@
 # Change Log
 
+### v1.0.7
+
+- Bugfix u2 syntax
+
 ### v1.0.6
 
 - Bugfix u2 syntax

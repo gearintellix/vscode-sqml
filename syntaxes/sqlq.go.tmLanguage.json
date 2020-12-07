@@ -310,7 +310,7 @@
 		},
 		"u2-tag": {
 			"name": "keyword.operator.u2.wrapper.sqlq",
-			"begin":"__(?=.{0,2}[a-zA-Z0-9_\\.+]+?__)",
+			"begin":"__(?=[^\\s]{0,2}[a-zA-Z0-9_\\.+]+?__)",
 			"end": "__",
 			"patterns": [
 				{
@@ -341,7 +341,7 @@
 		},
 		"u2-tag-highlight": {
 			"name": "entity.other.attribute-name.u2.wrapper.highlight.sqlq",
-			"begin":"__(?=.{0,2}[a-zA-Z0-9_\\.+]+?__)",
+			"begin":"__(?=[^\\s]{0,2}[a-zA-Z0-9_\\.+]+?__)",
 			"end": "__",
 			"patterns": [
 				{
