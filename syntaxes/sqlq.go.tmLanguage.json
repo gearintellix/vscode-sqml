@@ -310,11 +310,11 @@
 		},
 		"u2-tag": {
 			"name": "keyword.operator.u2.wrapper.sqlq",
-			"begin":"__(?=[^\\s]{0,2}[a-zA-Z0-9_\\.+]+?__)",
+			"begin":"__(?=[^\\s]{0,2}[a-zA-Z0-9_\\.+@]+?__)",
 			"end": "__",
 			"patterns": [
 				{
-					"match": "!([a-zA-Z0-9_\\.+]+?)(?=__)",
+					"match": "!([a-zA-Z0-9_\\.+@]+?)(?=__)",
 					"captures": {
 						"1": {
 							"name": "entity.name.type.u2.body.variable.sqlq"
@@ -322,7 +322,7 @@
 					}
 				},
 				{
-					"match": "(?!\\W{1,2})([a-zA-Z0-9_\\.+]+?)(?=__)",
+					"match": "(?!\\W{1,2})([a-zA-Z0-9_\\.+@]+?)(?=__)",
 					"captures": {
 						"1": {
 							"name": "string.quoted.single.u2.body.sqlq"
@@ -330,7 +330,7 @@
 					}
 				},
 				{
-					"match": "(?:\\W{1,2})([a-zA-Z0-9_\\.+]+?)(?=__)",
+					"match": "(?:\\W{1,2})([a-zA-Z0-9_\\.+@]+?)(?=__)",
 					"captures": {
 						"1": {
 							"name": "variable.other.u2.body.binding.sqlq"
@@ -341,11 +341,11 @@
 		},
 		"u2-tag-highlight": {
 			"name": "entity.other.attribute-name.u2.wrapper.highlight.sqlq",
-			"begin":"__(?=[^\\s]{0,2}[a-zA-Z0-9_\\.+]+?__)",
+			"begin":"__(?=[^\\s]{0,2}[a-zA-Z0-9_\\.+@]+?__)",
 			"end": "__",
 			"patterns": [
 				{
-					"match": "!([a-zA-Z0-9_\\.+]+?)(?=__)",
+					"match": "!([a-zA-Z0-9_\\.+@]+?)(?=__)",
 					"captures": {
 						"1": {
 							"name": "entity.name.type.u2.body.variable.sqlq"
@@ -353,7 +353,7 @@
 					}
 				},
 				{
-					"match": "(?!\\W{1,2})([a-zA-Z0-9_\\.+]*?)(?=__)",
+					"match": "(?!\\W{1,2})([a-zA-Z0-9_\\.+@]*?)(?=__)",
 					"captures": {
 						"1": {
 							"name": "entity.name.type.u2.body.highlight.sqlq"
@@ -361,7 +361,7 @@
 					}
 				},
 				{
-					"match": "(?:\\W{1,2})([a-zA-Z0-9_\\.+]*?)(?=__)",
+					"match": "(?:\\W{1,2})([a-zA-Z0-9_\\.+@]*?)(?=__)",
 					"captures": {
 						"1": {
 							"name": "variable.other.u2.body.binding.highlight.sqlq"

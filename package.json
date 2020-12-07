@@ -2,7 +2,7 @@
     "name": "vscode-sqml",
     "displayName": "SQLQ Markup Language",
     "description": "SQML (SQLQ Markup Language) ",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "engines": {
         "vscode": "^1.41.0"
     },

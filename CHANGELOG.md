@@ -1,5 +1,9 @@
 # Change Log
 
+### v1.0.8
+
+- Include character `@` to u2 syntax
+
 ### v1.0.7
 
 - Bugfix u2 syntax
